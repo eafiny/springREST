@@ -29,4 +29,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
 }
