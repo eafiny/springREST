@@ -1,5 +1,5 @@
 angular.module('app', []).controller('indexController', function($scope, $http){
-    const contextPath = 'http://localhost:8189/market';
+    const contextPath = 'http://localhost:8089/market';
 
     $scope.init = function () {
         $http.get(contextPath + '/api/v1/products')
@@ -19,21 +19,35 @@ angular.module('app', []).controller('indexController', function($scope, $http){
                 });
         };
 
-    $scope.clickOnProduct = function (product){
-        console.log(product);
-    }
+    $scope.clickOnProduct = function (p){
+        console.log(p);
+    };
 
-    $scope.pingProduct = function (productId){
+    $scope.addProductToCart = function (productId){
+        console.log(productId);
         $http({
-            url: contextPath + '/api/v1/cart/ping',
-            method: 'GET',
-            params: {
-                id: productId
-            }
+             url: contextPath + '/api/v1/cart/add',
+             method: 'GET',
+             params: {
+                 id: productId
+             }
         }).then(function (response){
-            console.log("OK");
+             console.log("OK");
+             $scope.cartProducts = response.data;
         });
-    }
+    };
+
+    $scope.deleteAllFromCart = function(){
+        $http({
+             url: contextPath + '/api/v1/cart/clean',
+             method: 'GET',
+             params: {
+                  cartCleanStatus: 1
+             }
+        }).then(function (response){
+        $scope.cartProducts = null;
+        });
+    };
 
     $scope.init();
 });
