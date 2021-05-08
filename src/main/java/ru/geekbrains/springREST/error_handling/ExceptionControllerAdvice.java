@@ -10,4 +10,10 @@ public class ExceptionControllerAdvice {
         MarketError error = new MarketError(HttpStatus.NOT_FOUND.value(), e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<MarketError> handleInvalidDataException(InvalidDataException e){
+        MarketError error = new MarketError(HttpStatus.BAD_REQUEST.value(), e.getMessages());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
