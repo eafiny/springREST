@@ -5,11 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.springREST.dtos.CartDto;
 import ru.geekbrains.springREST.models.Product;
 import ru.geekbrains.springREST.services.ProductService;
 import ru.geekbrains.springREST.utils.Cart;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cart")
@@ -20,10 +19,12 @@ public class CartController {
     private final ProductService productService;
 
     @GetMapping("/add")
-    public List<Product> addProductToCart(@RequestParam Long id){
+    public CartDto addProductToCart(@RequestParam Long id){
+        log.info("log: В корзину добавляем продукт c id: " + id);
         cart.add(productService.findById(id).get());
-        log.info("log: В корзину добавлен продукт: " + cart.getItems());
-        return cart.getItems();
+        //log.info("log: В корзину добавлен продукт: " + cart.getItems());
+
+        return new CartDto(cart);
     }
 
     @GetMapping("/clean")
