@@ -78,12 +78,16 @@
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Title</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat = "p in cartProducts">
                 <td>{{p.id}}</td>
                 <td>{{p.title}}</td>
+                <td>{{p.categoryTitle}}</td>
+                <td>{{p.price}}</td>
             </tr>
             </tbody>
         </table>

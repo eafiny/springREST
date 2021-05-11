@@ -49,8 +49,9 @@ angular.module('app', []).controller('indexController', function($scope, $http){
                  id: productId
              }
         }).then(function (response){
-             console.log("OK");
-             $scope.cartProducts = response.data;
+             console.log("Ответ сервера на добавление товара в корзину");
+             console.log(response.data);
+             $scope.cartProducts = response.data.itemsDto;
         });
     };
 
